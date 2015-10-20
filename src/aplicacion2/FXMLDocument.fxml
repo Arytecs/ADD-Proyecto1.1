@@ -14,31 +14,60 @@
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
                   <MenuItem fx:id="MenuNuevo" mnemonicParsing="false" onAction="#aparecerPanel" text="Nuevo" />
-                  <MenuItem fx:id="menuAbrir" mnemonicParsing="false" text="Abrir" />
-                  <MenuItem fx:id="menuGuardar" mnemonicParsing="false" text="Guardar" />
+                  <MenuItem fx:id="menuAbrir" mnemonicParsing="false" onAction="#abrirArchivo" text="Abrir" />
+                  <Menu mnemonicParsing="false" text="Guardar en ...">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#panelGuardarXML" text="XML" />
+                        <MenuItem fx:id="guardarBinario" mnemonicParsing="false" onAction="#panelGuardarBinario" text="Binario" />
+                        <MenuItem fx:id="guardarTXT" mnemonicParsing="false" onAction="#panelGuardarTXT" text="TXT" />
+                    </items>
+                  </Menu>
               <MenuItem fx:id="MenuCerrar" mnemonicParsing="false" onAction="#salirPrograma" text="Cerrar" />
-                  <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="pane1" layoutX="2.0" layoutY="34.0" prefHeight="350.0" prefWidth="648.0">
+      <Pane fx:id="pane1" layoutX="2.0" layoutY="34.0" prefHeight="350.0" prefWidth="648.0" visible="false">
          <children>
-            <TextField layoutX="102.0" layoutY="43.0" prefHeight="25.0" prefWidth="156.0" />
+            <TextField fx:id="nombreSoft" layoutX="102.0" layoutY="43.0" prefHeight="25.0" prefWidth="156.0" />
             <Text layoutX="19.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="51.0" />
             <Text layoutX="323.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="69.0" />
-            <TextArea layoutX="392.0" layoutY="43.0" prefHeight="95.0" prefWidth="242.0" />
+            <TextArea fx:id="descripcion" layoutX="392.0" layoutY="43.0" prefHeight="95.0" prefWidth="242.0" />
             <Text layoutX="19.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión" wrappingWidth="69.0" />
-            <RadioButton layoutX="102.0" layoutY="165.0" mnemonicParsing="false" text="Gratis" />
-            <RadioButton layoutX="192.0" layoutY="165.0" mnemonicParsing="false" text="De Pago" />
+            <RadioButton fx:id="versionGratis" layoutX="102.0" layoutY="165.0" mnemonicParsing="false" text="Gratis" />
+            <RadioButton fx:id="versionPago" layoutX="192.0" layoutY="167.0" mnemonicParsing="false" text="De Pago" />
             <Text layoutX="323.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
-            <TextField layoutX="392.0" layoutY="161.0" prefHeight="25.0" prefWidth="58.0" />
+            <TextField fx:id="precio" layoutX="392.0" layoutY="161.0" prefHeight="25.0" prefWidth="58.0" />
             <Text layoutX="459.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
             <Text layoutX="19.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos" />
-            <TextArea layoutX="102.0" layoutY="219.0" prefHeight="95.0" prefWidth="156.0" />
+            <TextArea fx:id="requisitos" layoutX="102.0" layoutY="219.0" prefHeight="95.0" prefWidth="156.0" />
             <Text layoutX="323.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alternativas" />
-            <TextArea layoutX="392.0" layoutY="216.0" prefHeight="95.0" prefWidth="242.0" />
+            <TextArea fx:id="alternativas" layoutX="392.0" layoutY="216.0" prefHeight="95.0" prefWidth="242.0" />
             <Line endX="300.0" layoutX="150.0" layoutY="170.0" rotate="90.0" stroke="#0000009b" strokeWidth="0.5" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneTXT" layoutX="70.0" layoutY="65.0" prefHeight="289.0" prefWidth="510.0" visible="false">
+         <children>
+            <TextField fx:id="nombreTXT" layoutX="210.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
+            <Text layoutX="92.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre fichero" />
+            <Button fx:id="botonTXT" layoutX="210.0" layoutY="180.0" mnemonicParsing="false" onAction="#guardarTXT" text="Guardar" />
+            <Text layoutX="372.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".txt" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneBinario" layoutX="70.0" layoutY="65.0" prefHeight="289.0" prefWidth="510.0" visible="false">
+         <children>
+            <TextField fx:id="nombreBinario" layoutX="210.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
+            <Text layoutX="92.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre fichero" />
+            <Button layoutX="210.0" layoutY="180.0" mnemonicParsing="false" onAction="#guardarBinario" text="Guardar" />
+            <Text layoutX="372.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".dat" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneXML" layoutX="70.0" layoutY="65.0" prefHeight="289.0" prefWidth="510.0" visible="false">
+         <children>
+            <Text layoutX="372.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".xml" />
+            <Button layoutX="210.0" layoutY="180.0" mnemonicParsing="false" onAction="#guardarXML" text="Guardar" />
+            <Text layoutX="92.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre fichero" />
+            <TextField fx:id="nombreXML" layoutX="210.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
          </children>
       </Pane>
     </children>

@@ -1,0 +1,6 @@
+Nombre: adfaf
+Version: Gratis
+Requisitos: adsf
+Descripción: adf
+Precio: 
+Alternativas: 

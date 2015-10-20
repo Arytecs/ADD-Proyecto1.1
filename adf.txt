@@ -1,0 +1,6 @@
+Nombre: null
+Version: Gratis
+Requisitos: 
+Descripción: 
+Precio: 
+Alternativas: 
