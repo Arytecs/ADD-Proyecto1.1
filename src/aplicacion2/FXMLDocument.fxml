@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion2.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <MenuBar prefHeight="34.0" prefWidth="78.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+                  <MenuItem fx:id="MenuNuevo" mnemonicParsing="false" onAction="#aparecerPanel" text="Nuevo" />
+                  <MenuItem mnemonicParsing="false" text="Abrir" />
+                  <MenuItem mnemonicParsing="false" text="Guardar" />
+              <MenuItem fx:id="MenuCerrar" mnemonicParsing="false" onAction="#salirPrograma" text="Cerrar" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="pane1" layoutX="4.0" layoutY="34.0" prefHeight="262.0" prefWidth="558.0">
+         <children>
+            <TextField layoutX="103.0" layoutY="7.0" />
+            <Text layoutX="20.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="51.0" />
+            <Text layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="69.0" />
+            <TextArea layoutX="103.0" layoutY="55.0" prefHeight="69.0" prefWidth="149.0" />
+            <Text layoutX="20.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión" wrappingWidth="69.0" />
+            <RadioButton layoutX="103.0" layoutY="147.0" mnemonicParsing="false" text="Gratis" />
+            <RadioButton layoutX="186.0" layoutY="147.0" mnemonicParsing="false" text="De Pago" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>
