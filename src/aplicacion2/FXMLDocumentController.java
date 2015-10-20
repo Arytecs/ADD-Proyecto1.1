@@ -28,6 +28,8 @@ public class FXMLDocumentController implements Initializable {
     private Pane pane1;
     @FXML
     private MenuItem MenuCerrar;
+    @FXML
+    private MenuItem abrir;
     
     @FXML
     public void aparecerPanel()

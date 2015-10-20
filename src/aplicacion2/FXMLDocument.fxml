@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion2.FXMLDocumentController">
@@ -13,22 +14,31 @@
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
                   <MenuItem fx:id="MenuNuevo" mnemonicParsing="false" onAction="#aparecerPanel" text="Nuevo" />
-                  <MenuItem mnemonicParsing="false" text="Abrir" />
-                  <MenuItem mnemonicParsing="false" text="Guardar" />
+                  <MenuItem fx:id="menuAbrir" mnemonicParsing="false" text="Abrir" />
+                  <MenuItem fx:id="menuGuardar" mnemonicParsing="false" text="Guardar" />
               <MenuItem fx:id="MenuCerrar" mnemonicParsing="false" onAction="#salirPrograma" text="Cerrar" />
+                  <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="pane1" layoutX="4.0" layoutY="34.0" prefHeight="262.0" prefWidth="558.0">
+      <Pane fx:id="pane1" layoutX="2.0" layoutY="34.0" prefHeight="350.0" prefWidth="648.0">
          <children>
-            <TextField layoutX="103.0" layoutY="7.0" />
-            <Text layoutX="20.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="51.0" />
-            <Text layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="69.0" />
-            <TextArea layoutX="103.0" layoutY="55.0" prefHeight="69.0" prefWidth="149.0" />
-            <Text layoutX="20.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión" wrappingWidth="69.0" />
-            <RadioButton layoutX="103.0" layoutY="147.0" mnemonicParsing="false" text="Gratis" />
-            <RadioButton layoutX="186.0" layoutY="147.0" mnemonicParsing="false" text="De Pago" />
+            <TextField layoutX="102.0" layoutY="43.0" prefHeight="25.0" prefWidth="156.0" />
+            <Text layoutX="19.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="51.0" />
+            <Text layoutX="323.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="69.0" />
+            <TextArea layoutX="392.0" layoutY="43.0" prefHeight="95.0" prefWidth="242.0" />
+            <Text layoutX="19.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión" wrappingWidth="69.0" />
+            <RadioButton layoutX="102.0" layoutY="165.0" mnemonicParsing="false" text="Gratis" />
+            <RadioButton layoutX="192.0" layoutY="165.0" mnemonicParsing="false" text="De Pago" />
+            <Text layoutX="323.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
+            <TextField layoutX="392.0" layoutY="161.0" prefHeight="25.0" prefWidth="58.0" />
+            <Text layoutX="459.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
+            <Text layoutX="19.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos" />
+            <TextArea layoutX="102.0" layoutY="219.0" prefHeight="95.0" prefWidth="156.0" />
+            <Text layoutX="323.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alternativas" />
+            <TextArea layoutX="392.0" layoutY="216.0" prefHeight="95.0" prefWidth="242.0" />
+            <Line endX="300.0" layoutX="150.0" layoutY="170.0" rotate="90.0" stroke="#0000009b" strokeWidth="0.5" />
          </children>
       </Pane>
     </children>
