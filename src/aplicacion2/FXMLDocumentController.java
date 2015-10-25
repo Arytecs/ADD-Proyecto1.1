@@ -5,6 +5,8 @@
  */
 package aplicacion2;
 
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -26,11 +28,30 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 /**
  *
- * @author usuario
+ * @author araceliTeruel
  */
 public class FXMLDocumentController implements Initializable {
     
@@ -76,6 +97,12 @@ public class FXMLDocumentController implements Initializable {
     private TextField nombreBinario;
     @FXML
     private TextField nombreXML;
+    @FXML
+    private TextField nombreAbrirXML;
+    @FXML
+    private Pane paneAbrirXML;
+    @FXML
+    private MenuItem abrirPaneXML;
     
     @FXML
     public void aparecerPanel()
@@ -101,7 +128,7 @@ public class FXMLDocumentController implements Initializable {
     private void guardarTXT() {
         FileWriter fichero=null;
         String version;
-        if(versionGratis.isDisabled())
+        if(versionPago.isSelected()==true)
             version="De pago";
         else
             version="Gratis";
@@ -129,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void guardarBinario(ActionEvent event) {
         String version;
-        if(versionGratis.isDisabled())
+        if(versionPago.isSelected()==true)
             version="De pago";
         else
             version="Gratis";
@@ -153,6 +180,68 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void guardarXML(ActionEvent event) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try {
+            builder = factory.newDocumentBuilder();
+            DOMImplementation implementation = builder.getDOMImplementation();
+            Document document = implementation.createDocument(null, nombreXML.getText(), null);
+            document.setXmlVersion("1.0");
+            Element raiz=document.getDocumentElement();
+            
+            Element itemNode = document.createElement("Software"); 
+                
+                Element nombre = document.createElement("Nombre"); 
+                Text nombreT = document.createTextNode(nombreSoft.getText());
+                nombre.appendChild(nombreT);      
+                String version1;
+                if(versionPago.isSelected()==true)
+                    version1="De pago";
+                else
+                    version1="Gratis";
+                Element version = document.createElement("Version"); 
+                Text versionT = document.createTextNode(version1);                
+                version.appendChild(versionT);
+                
+                Element requisito = document.createElement("Requisitos"); 
+                Text requisitosT = document.createTextNode(requisitos.getText());                
+                requisito.appendChild(requisitosT);
+                
+                Element descrip = document.createElement("Descripcion"); 
+                Text descripT = document.createTextNode(descripcion.getText());                
+                descrip.appendChild(descripT);
+                
+                Element price = document.createElement("Precio"); 
+                Text priceT = document.createTextNode(precio.getText());                
+                price.appendChild(priceT);
+                
+                Element alt = document.createElement("Alternativas"); 
+                Text altT = document.createTextNode(alternativas.getText());                
+                alt.appendChild(altT);
+                
+                itemNode.appendChild(nombre);
+                itemNode.appendChild(version);
+                itemNode.appendChild(requisito);
+                itemNode.appendChild(descrip);
+                itemNode.appendChild(price);
+                itemNode.appendChild(alt);
+                
+                raiz.appendChild(itemNode);
+                
+                
+                Source source = new DOMSource(document);
+                //Indicamos donde lo queremos almacenar
+                Result result = new StreamResult(new java.io.File(nombreXML.getText()+".xml")); //nombre del archivo
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                transformer.transform(source, result);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        paneXML.setVisible(false);
     }
 
     @FXML
@@ -175,5 +264,84 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void abrirArchivo(ActionEvent event) {
+        /*FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto", "txt");
+	JFileChooser fileChooserCargar = new JFileChooser();
+	fileChooserCargar.setFileFilter(filtro);
+	fileChooserCargar.setDialogTitle("Abrir");
+	 
+	int seleccion = fileChooserCargar.showOpenDialog(this);
+	 
+	if (seleccion == JFileChooser.APPROVE_OPTION) {
+	File file = fileChooserCargar.getSelectedFile();
+	Modificar m = new Modificar(this, file);
+	}*/
+    }
+    
+    @FXML
+    private void abrirXML(ActionEvent event) {
+        Document doc=null;
+        paneAbrirXML.setVisible(false);
+        pane1.setVisible(true);
+        try{
+            //Se crea un objeto DocumentBuiderFactory.
+            DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+            factory.setIgnoringComments(true);
+            factory.setIgnoringElementContentWhitespace(true);
+            DocumentBuilder builder=factory.newDocumentBuilder();
+            
+            doc=builder.parse(nombreAbrirXML.getText()+".xml"); 
+            //Ahora doc apunta al árbol DOM listo para ser recorrido. 
+            Node raiz=doc.getFirstChild();
+            Node nodo;
+            NodeList nodos=raiz.getChildNodes();
+            String datos[];
+            nodo=nodos.item(0);
+            if(nodo.getNodeType()==Node.ELEMENT_NODE){
+                datos=procesarNodo(nodo);
+                nombreSoft.setText(datos[0]);
+                if(datos[1].equals("De pago"))
+                    versionPago.selectedProperty();
+                else
+                    versionGratis.selectedProperty();
+                requisitos.setText(datos[2]);
+                descripcion.setText(datos[3]);
+                precio.setText(datos[4]);
+                alternativas.setText(datos[5]);
+                
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public String[] procesarNodo(Node nodo){
+        String datos[]= new String[6]; 
+        Node ntemp=null;
+        int contador=0;
+        
+        NodeList nodos=nodo.getChildNodes();
+         for (int i=0; i<nodos.getLength(); i++)
+         {
+             ntemp = nodos.item(i);
+             //Se debe comprobar el tipo de nodo que se quiere tratar por que posible que haya
+             //nodos tipo TEXT que contengan retornos de carro al cambiar de línea en el XML.
+             //En este ejemplo, cuando detecta un nodo que no es tipo ELEMENT_NODE es porque es tipo TEXT
+             // y contiene los retornos de carro "\n" que se incluyen en el fichero de texto al crear el XML.
+             if(ntemp.getNodeType()==Node.ELEMENT_NODE){
+                  //IMPORTANTE: para obtener el texto con el título accede al nodo TEXT hijo de ntemp y saca su valor.
+                   datos[contador]=ntemp.getChildNodes().item(0).getNodeValue();
+                   contador++;
+             }
+             
+             
+         }
+        
+        return datos;
+    }
+    
+    @FXML
+    private void abrirPaneXML(){
+        paneAbrirXML.setVisible(true);
+        pane1.setVisible(false);
     }
 }

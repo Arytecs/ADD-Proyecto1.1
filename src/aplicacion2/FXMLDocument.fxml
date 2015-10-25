@@ -9,12 +9,18 @@
 <AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion2.FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <MenuBar prefHeight="34.0" prefWidth="78.0">
+      <MenuBar prefHeight="31.0" prefWidth="92.0">
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
                   <MenuItem fx:id="MenuNuevo" mnemonicParsing="false" onAction="#aparecerPanel" text="Nuevo" />
-                  <MenuItem fx:id="menuAbrir" mnemonicParsing="false" onAction="#abrirArchivo" text="Abrir" />
+                  <Menu mnemonicParsing="false" text="Abrir como...">
+                    <items>
+                      <MenuItem fx:id="abrirPaneXML" mnemonicParsing="false" onAction="#abrirPaneXML" text="XML" />
+                        <MenuItem fx:id="menuAbrir" mnemonicParsing="false" onAction="#abrirArchivo" text="Binario" />
+                        <MenuItem mnemonicParsing="false" text="TXT" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Guardar en ...">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#panelGuardarXML" text="XML" />
@@ -27,22 +33,22 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="pane1" layoutX="2.0" layoutY="34.0" prefHeight="350.0" prefWidth="648.0" visible="false">
+      <Pane fx:id="pane1" layoutX="2.0" layoutY="34.0" prefHeight="363.0" prefWidth="666.0" visible="false">
          <children>
             <TextField fx:id="nombreSoft" layoutX="102.0" layoutY="43.0" prefHeight="25.0" prefWidth="156.0" />
             <Text layoutX="19.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="51.0" />
-            <Text layoutX="323.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="69.0" />
-            <TextArea fx:id="descripcion" layoutX="392.0" layoutY="43.0" prefHeight="95.0" prefWidth="242.0" />
+            <Text layoutX="323.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" wrappingWidth="74.8902587890625" />
+            <TextArea fx:id="descripcion" layoutX="410.0" layoutY="42.0" prefHeight="95.0" prefWidth="242.0" />
             <Text layoutX="19.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión" wrappingWidth="69.0" />
             <RadioButton fx:id="versionGratis" layoutX="102.0" layoutY="165.0" mnemonicParsing="false" text="Gratis" />
             <RadioButton fx:id="versionPago" layoutX="192.0" layoutY="167.0" mnemonicParsing="false" text="De Pago" />
             <Text layoutX="323.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
-            <TextField fx:id="precio" layoutX="392.0" layoutY="161.0" prefHeight="25.0" prefWidth="58.0" />
-            <Text layoutX="459.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
+            <TextField fx:id="precio" layoutX="410.0" layoutY="160.0" prefHeight="25.0" prefWidth="58.0" />
+            <Text layoutX="477.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
             <Text layoutX="19.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos" />
             <TextArea fx:id="requisitos" layoutX="102.0" layoutY="219.0" prefHeight="95.0" prefWidth="156.0" />
             <Text layoutX="323.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alternativas" />
-            <TextArea fx:id="alternativas" layoutX="392.0" layoutY="216.0" prefHeight="95.0" prefWidth="242.0" />
+            <TextArea fx:id="alternativas" layoutX="410.0" layoutY="215.0" prefHeight="95.0" prefWidth="242.0" />
             <Line endX="300.0" layoutX="150.0" layoutY="170.0" rotate="90.0" stroke="#0000009b" strokeWidth="0.5" />
          </children>
       </Pane>
@@ -68,6 +74,14 @@
             <Button layoutX="210.0" layoutY="180.0" mnemonicParsing="false" onAction="#guardarXML" text="Guardar" />
             <Text layoutX="92.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre fichero" />
             <TextField fx:id="nombreXML" layoutX="210.0" layoutY="81.0" prefHeight="25.0" prefWidth="156.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneAbrirXML" prefHeight="397.0" prefWidth="668.0" visible="false">
+         <children>
+            <Text layoutX="461.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".xml" />
+            <TextField fx:id="nombreAbrirXML" layoutX="299.0" layoutY="136.0" prefHeight="25.0" prefWidth="156.0" />
+            <Text layoutX="181.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre fichero" />
+            <Button layoutX="304.0" layoutY="235.0" mnemonicParsing="false" onAction="#abrirXML" text="Abrir" />
          </children>
       </Pane>
     </children>
